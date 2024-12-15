@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Tao - Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            max-width: 1100px;
+            margin: auto;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            background-color: #fff;
+        }
+        .left {
+            width: 35%;
+            background: #000;
+            color: #fff;
+            text-align: center;
+        }
+        .left img {
+            width: 100%;
+            height: auto;
+        }
+        .left h1 {
+            margin: 10px 0;
+        }
+        .left p {
+            font-size: 0.9em;
+            margin: 10px;
+        }
+        .right {
+            width: 65%;
+            padding: 20px;
+        }
+        h2 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .music img {
+            width: 50px;
+            margin-right: 10px;
+        }
+        .music {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .contact p {
+            margin: 5px 0;
+        }
+        .github-link {
+            margin: 5px 0;
+        }
+        .edit-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .edit-container input {
+            margin-right: 10px;
+            padding: 5px;
+        }
+        .edit-container button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        #music-form {
+            display: none;
+            margin-top: 10px;
+        }
+        #music-form input {
+            margin: 5px 0;
+            padding: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left">
+            <img src="/Users/karenhuang/Desktop/4.jpg" alt="Karen">
+            <h1 id="name-display">Karen</h1>
+            <div class="edit-container">
+                <input type="text" id="name-input" style="display: none;" value="Karen">
+                <button id="edit-btn">edit</button>
+            </div>
+            <p>I am a freshman in the Department of Management Information Systems at National Chengchi University. I am very interested in studying programming and computer science fundamentals. I have experience in writing Java, HTML, CSS, JavaScript, and Python.</p>
+            <h3>CONTACT</h3>
+            <p>yixuanh047@gmail.com</p>
+        </div>
+        <!-- Right Section -->
+        <div class="right">
+            <!-- Education -->
+            <div class="section">
+                <h2>Education</h2>
+                <p><strong>2024 - now</strong> <br> National Chengchi University, Department of MIS</p>
+                <p><strong>2022 - 2024</strong> <br>PCSH<br> Participated in volleyball club, food club</p>
+                <p><strong>2019 - 2022</strong> <br> Middle School Graduation <br> Started developing an interest in computer science</p>
+            </div>
+            <!-- Homework List -->
+            <div class="section">
+                <h2>Homework List</h2>
+                <p class="github-link"><strong>HW1 -</strong> <a href="https://github.com/karen623/113306035_Lab4.git" target="_blank">https://github.com/karen623/113306035_Lab4.git</a></p>
+                <p class="github-link"><strong>HW2 -</strong> <a href="https://github.com/karen623/113306035_HW6_1A3B.git" target="_blank">https://github.com/karen623/113306035_HW6_1A3B.git</a></p>
+                <p class="github-link"><strong>HW3 -</strong> <a href="https://github.com/karen623/113306035_Lab3.git" target="_blank">https://github.com/karen623/113306035_Lab3.git</a></p>
+            </div>
+            <!-- Favorite Music -->
+            <div class="section">
+                <h2>Favorite Music</h2>
+                <div id="music-list">
+                    <div class="music">
+                        <img src="/Users/karenhuang/Desktop/Unknown.png" alt="Spotify">
+                        <span>Good Graces</span>
+                    </div>
+                </div>
+                <button id="add-music">add</button>
+                <form id="music-form">
+                    <input type="text" id="music-link" placeholder="Music Link">
+                    <input type="text" id="music-name" placeholder="Music Name">
+                    <button type="button" id="submit-music">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Edit/Save Name Functionality
+        const editBtn = document.getElementById('edit-btn');
+        const nameDisplay = document.getElementById('name-display');
+        const nameInput = document.getElementById('name-input');
+
+        editBtn.addEventListener('click', () => {
+            if (editBtn.innerText === 'edit') {
+                nameInput.style.display = 'inline';
+                nameDisplay.style.display = 'none';
+                editBtn.innerText = 'save';
+            } else {
+                nameDisplay.innerText = nameInput.value;
+                nameInput.style.display = 'none';
+                nameDisplay.style.display = 'block';
+                editBtn.innerText = 'edit';
+            }
+        });
+
+        // Add Music Functionality
+        const addMusicBtn = document.getElementById('add-music');
+        const musicForm = document.getElementById('music-form');
+        const submitMusicBtn = document.getElementById('submit-music');
+        const musicList = document.getElementById('music-list');
+
+        addMusicBtn.addEventListener('click', () => {
+            musicForm.style.display = 'block';
+        });
+
+        submitMusicBtn.addEventListener('click', () => {
+            const musicLink = document.getElementById('music-link').value;
+            const musicName = document.getElementById('music-name').value;
+
+            if (musicLink && musicName) {
+                const musicItem = document.createElement('div');
+                musicItem.classList.add('music');
+                musicItem.innerHTML = `
+                    <img src="/Users/karenhuang/Desktop/Unknown.png" alt="Spotify">
+                    <a href="${musicLink}" target="_blank">${musicName}</a>
+                `;
+                musicList.appendChild(musicItem);
+                musicForm.style.display = 'none';
+                document.getElementById('music-link').value = '';
+                document.getElementById('music-name').value = '';
+            } else {
+                alert('Please fill in both fields.');
+            }
+        });
+    </script>
+</body>
+</html>
